@@ -44,4 +44,4 @@ end files with a newline]
     cd to that directory:
       cd ../01_apple
     and open the README there in emacs.  Follow its instructions!
-    
+   
