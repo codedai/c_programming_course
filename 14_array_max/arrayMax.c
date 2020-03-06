@@ -2,7 +2,15 @@
 #include <stdlib.h>
 
 int * arrayMax(int * array, int n) {
-  return NULL;
+  if (n==0) {return NULL;}
+  int * rp = &array[0];
+  int maxCandi = *rp;
+  for (int i = 1; i < n; i++) {
+    if (array[i] > maxCandi) {
+      rp = &array[i];
+    }
+  }
+  return rp;
 }
 
 void doTest(int * array, int n) {
