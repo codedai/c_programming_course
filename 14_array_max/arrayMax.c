@@ -8,6 +8,7 @@ int * arrayMax(int * array, int n) {
   for (int i = 1; i < n; i++) {
     if (array[i] > maxCandi) {
       rp = &array[i];
+      maxCandi = *rp;
     }
   }
   return rp;
