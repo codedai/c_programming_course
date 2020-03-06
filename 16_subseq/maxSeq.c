@@ -1,5 +1,6 @@
 #include <stddef.h>
 size_t maxSeq(int * array, size_t n) {
+  if (n == 0) {return NULL;}
   size_t maxLen = 1;
   size_t current = 1;
   for (size_t i = 1; i < n; i++) {
