@@ -18,7 +18,7 @@ suit_t flush_suit(deck_t * hand) {
   card_t ** testCardptrs = (*hand).cards;
   int s, h, d, c;
   s = h = d = c = 0;
-  for (size_t i = 1; i < hand->n_cards; i++) {
+  for (size_t i = 0; i < hand->n_cards; i++) {
     switch (testCardptrs[i]->suit) {
     case SPADES: s++; break;
     case HEARTS: h++; break;

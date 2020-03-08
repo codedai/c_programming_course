@@ -10,8 +10,7 @@ void print_hand(deck_t * hand){
   else {
     card_t ** aofcptr = (*hand).cards;
     for (size_t i = 0; i < (*hand).n_cards; i++) {
-      print_card(**aofcptr);
-      aofcptr++;
+      print_card(*aofcptr[i]);
     }
   }
 }
