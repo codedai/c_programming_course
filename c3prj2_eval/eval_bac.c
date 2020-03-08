@@ -1,122 +1,113 @@
-#include"eval.h"
+#include "eval.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-int com1(card_t c1,card_t c2){
-  if (c1.value == c2.value) return 1;
-  return 0;
-}
-
 
 int card_ptr_comp(const void * vp1, const void * vp2) {
-  const card_t * const * cp1=vp1;
-  const card_t * const * cp2=vp2;
-  if ((**cp1).value > (**cp2).value) return -1;
-  else if ((**cp1).value < (**cp2).value) return 1;
-  else if ((**cp1).suit < (**cp2).suit) return -1;
-  else if ((**cp1).suit > (**cp2).suit) return 1;
-  else return 0;
+  const card_t * const * vp1tr = vp1;
+  const card_t * const * vp2tr = vp2;
+
+  if ((**vp1tr).value != (**vp2tr).value) {
+    return (**vp2tr).value - (**vp1tr).value;
+  } else {
+    return (**vp2tr).suit - (**vp1tr).suit;
+  }
 }
 
 suit_t flush_suit(deck_t * hand) {
-  card_t** card= hand -> cards;
-  card_t card1;
-  card1 = **(card +0);
-  int s,h,d,c;
-  s=h=d=c=0;
-
-
-  for (size_t i=0 ;i< (hand ->n_cards);i++){
-    card1 = **(card +i);
-    switch(card1.suit){
-    case SPADES : {s++;  break;}
-    case HEARTS : { h++;  break;}
-    case DIAMONDS :{ d++ ;  break;}
-    case CLUBS :{c++ ; break;}
+  card_t ** testCardptrs = (*hand).cards;
+  int s, h, d, c;
+  s = h = d = c = 0;
+  for (size_t i = 1; i < hand->n_cards; i++) {
+    switch (testCardptrs[i]->suit) {
+    case SPADES: s++; break;
+    case HEARTS: h++; break;
+    case DIAMONDS: d++; break;
+    case CLUBS: c++; break;
     case NUM_SUITS: break;
-
     }
   }
-
   if (s >= 5) return SPADES;
   if (h >= 5) return HEARTS;
   if (d >= 5) return DIAMONDS;
   if (c >= 5) return CLUBS;
   return NUM_SUITS;
-
 }
 
 unsigned get_largest_element(unsigned * arr, size_t n) {
-  unsigned largest= arr[0];
-  for (size_t i=1 ; i<n ;i++ ){
-    if (arr[i] > largest) largest=arr[i];
+  unsigned ans = arr[0];
+  for (size_t i = 1; i < n; i++) {
+    if (ans < arr[i]) {ans = arr[i];}
   }
-  return largest;
+  return ans;
 }
 
 size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
-
-  for (size_t i=0;i<n;i++){
-    if (match_counts[i] == n_of_akind) return i;
+  if (match_counts == NULL || n == 0) {assert(0);}
+  else {
+    for (size_t i = 0; i < n; i++) {
+      if (match_counts[i] == n_of_akind) {return i;}
+    }
   }
-
   return 0;
 }
-
 ssize_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
-  card_t** card = hand -> cards;
-  card_t card1,card2;
-  card2 = **(card + match_idx);
-  card1=**(card+0);
-  for (size_t i=0 ;i< (hand ->n_cards);i++){
-    card1=**(card+i);
-    if ((match_counts[i] > 1)&&(card1.value != card2.value)) return i;
+  card_t ** cardsInHand = hand -> cards;
+  size_t numOfCards = hand -> n_cards;
+  card_t * matchCard = cardsInHand[match_idx];
+  
+  for (size_t i = 0; i < numOfCards; i++) {
+    if(match_counts[i] > 1 && matchCard -> value != cardsInHand[i] -> value) return i;
   }
-
   return -1;
 }
+
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
-  int count =1;
-  if (fs ==NUM_SUITS ){
-    for (size_t i=index ; i<hand ->n_cards-1; i++){
-      if ((*hand->cards[i]).value==(*hand->cards[i+1]).value) continue;
-      if ((*hand->cards[i]).value-1==(*hand->cards[i+1]).value){
-	count ++;
-	if (count == n) return 1;}
-      else return 0;
-    }}
-  else {
-    if((*hand->cards[index]).suit != fs ) return 0;
-    card_t* org=hand->cards[index];
-    for (size_t i=index+1 ; i<hand ->n_cards; i++){
-      if ((*hand->cards[i]).suit != fs) continue;
-      if (org->value-1==(*hand->cards[i]).value){
-	count ++;
+  int count = 1;
+  card_t ** cardsInHand = hand->cards;
+  if (fs == NUM_SUITS) {
+    for (size_t i = index; i < hand->n_cards-1; i++) {
+      if (cardsInHand[i]->value == cardsInHand[i+1]->value) continue;
+      if (cardsInHand[i]->value-1 == cardsInHand[i+1]->value) {
+	count++;
 	if (count == n) return 1;
-	org=hand->cards[i]; }
-      else return 0;}}
-
-  return 0;
-}
-
-int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs){
-  if((*hand->cards[index]).value == VALUE_ACE){
-    for (size_t i=index+1 ; i<hand ->n_cards-3; i++){
-      int t=is_n_length_straight_at( hand,i,fs, 4);
-      if (t ==1 && (*hand->cards[i]).value==5) {
-	if (fs == NUM_SUITS )  return 1;
-	else if ((*hand->cards[index]).suit == fs) return 1;
-	return 0;
+      } else return 0;
+    }
+  } else {
+    if (cardsInHand[index]->suit != fs) return 0;
+    else {
+      card_t * tmpCard = cardsInHand[index];
+      for (size_t i = index+1; i < hand->n_cards; i++) {
+	if (cardsInHand[i]->suit != fs) continue;
+	if (tmpCard->value-1 == cardsInHand[i]->value) {
+	  count++;
+	  if (count == n) return 1;
+	  tmpCard = cardsInHand[i];
+	} else return 0;
       }
-    }}
+    }
+  }
   return 0;
 }
 
+int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  if ((hand->cards[index])->value == VALUE_ACE) {
+    card_t ** cardsInHands = hand->cards;
+    for (size_t i = index+1; i < hand->n_cards-3; i++) {
+      if (cardsInHands[i]->value == 5 && is_n_length_straight_at(hand, i, fs, 4) == 1) {
+	if (fs == NUM_SUITS) return 1;
+	else if (cardsInHands[index]->suit == fs) return 1;
+	else return 0;
+      }
+    }
+  }
+  return 0;
+}
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
-  if (is_ace_low_straight_at(hand, index,fs)) return -1;
+  if (is_ace_low_straight_at(hand, index, fs)) return -1;
   return is_n_length_straight_at(hand, index, fs, 5);
 }
 
@@ -125,30 +116,27 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 				  hand_ranking_t what,
 				  size_t idx) {
 
-
   hand_eval_t ans;
-  card_t**card = hand -> cards;
-  unsigned count =n;
-
   ans.ranking = what;
-
-  for(size_t i=0 ; i< n ; i++){
-    ans.cards[i] = *(card +idx+i);
+  card_t ** cardsInHand = hand->cards;
+  for (size_t i = 0; i < n; i++) {
+    ans.cards[i] = cardsInHand[i+idx];
   }
-  if (n < 5){
-    for(size_t i=0 ; i< idx ; i++){
-      ans.cards[i+n] = *(card +i);
-      count ++;
-      if (count == 5 )  break;
+  if (n < 5) {
+    unsigned count = n;
+    for (size_t i = 0; i < idx; i++) {
+      ans.cards[count+i] = cardsInHand[i];
+      count++;
+      if (count == 5) break;
     }
-    if (count < 5){
-      for (size_t i=n+idx ; i < hand -> n_cards+1 ; i++ ){
-	ans.cards[count]=*(card +i);
-	count ++;
-	if (count >= 5) break;}
+    if (count < 5) {
+      for (size_t i = idx + n; i < hand->n_cards; i++) {
+	ans.cards[count] = cardsInHand[i];
+	count++;
+	if (count == 5) break;
+      }
     }
   }
-
   return ans;
 }
 
@@ -180,8 +168,8 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
 //implementation in eval-c4.o) so that the
 //other functions we have provided can make
 //use of get_match_counts.
-
 unsigned * get_match_counts(deck_t * hand) ;
+
 // We provide the below functions.  You do NOT need to modify them
 // In fact, you should not modify them!
 
@@ -191,12 +179,10 @@ unsigned * get_match_counts(deck_t * hand) ;
 //into the card array "to"
 //if "fs" is NUM_SUITS, then suits are ignored.
 //if "fs" is any other value, a straight flush (of that suit) is copied.
-void copy_straight(card_t ** to, deck_t *from, size_t ind, suit_t fs, size_t count){
-
+void copy_straight(card_t ** to, deck_t *from, size_t ind, suit_t fs, size_t count) {
   assert(fs == NUM_SUITS || from->cards[ind]->suit == fs);
   unsigned nextv = from->cards[ind]->value;
   size_t to_ind = 0;
-  //  printf("%d %zu \n",fs,ind);
   while (count > 0) {
     assert(ind < from->n_cards);
     assert(nextv >= 2);
