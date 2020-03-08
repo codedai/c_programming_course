@@ -7,16 +7,17 @@ int com1(card_t c1,card_t c2){
   return 0;
 }
 
-
 int card_ptr_comp(const void * vp1, const void * vp2) {
-  const card_t * const * cp1=vp1;
-  const card_t * const * cp2=vp2;
-  if ((**cp1).value > (**cp2).value) return -1;
-  else if ((**cp1).value < (**cp2).value) return 1;
-  else if ((**cp1).suit < (**cp2).suit) return -1;
-  else if ((**cp1).suit > (**cp2).suit) return 1;
-  else return 0;
+  const card_t * const * vp1tr = vp1;
+  const card_t * const * vp2tr = vp2;
+
+  if ((**vp1tr).value != (**vp2tr).value) {
+    return (**vp2tr).value - (**vp1tr).value;
+  } else {
+    return (**vp2tr).suit - (**vp1tr).suit;
+  }
 }
+
 
 suit_t flush_suit(deck_t * hand) {
   card_t** card= hand -> cards;
