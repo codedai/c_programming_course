@@ -133,7 +133,7 @@ hand_eval_t build_hand_from_match(deck_t * hand,
   if (n < 5) {
     unsigned count = n;
     for (size_t i = 0; i < idx; i++) {
-      ans.cards[count+i] = cardsInHand[i];
+      ans.cards[n+i] = cardsInHand[i];
       count++;
       if (count == 5) break;
     }
