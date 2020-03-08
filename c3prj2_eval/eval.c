@@ -60,17 +60,16 @@ size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
 ssize_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
-  card_t** card = hand -> cards;
-  card_t card1,card2;
-  card2 = **(card + match_idx);
-  card1=**(card+0);
-  for (size_t i=0 ;i< (hand ->n_cards);i++){
-    card1=**(card+i);
-    if ((match_counts[i] > 1)&&(card1.value != card2.value)) return i;
+  card_t ** cardsInHand = hand -> cards;
+  size_t numOfCards = hand -> n_cards;
+  card_t * matchCard = cardsInHand[match_idx];
+  
+  for (size_t i = 0; i < numOfCards; i++) {
+    if(match_counts[i] > 1 && matchCard -> value != cardsInHand[i] -> value) return i;
   }
-
   return -1;
 }
+
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
   int count =1;
   if (fs ==NUM_SUITS ){
