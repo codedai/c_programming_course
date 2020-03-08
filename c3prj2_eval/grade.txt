@@ -1,4 +1,4 @@
-Grading at Sun Mar  8 06:10:35 UTC 2020
+Grading at Sun Mar  8 06:52:24 UTC 2020
 Compiling your code
 rm -f test poker cards.o my-test-main.o *~
 cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o deck.o deck.c
@@ -11,110 +11,110 @@ Your file matched the expected output
  - Testcase passed
 Testcase 2: Trying hands with pairs
 Valgrind returned an error status
-==1685== Memcheck, a memory error detector
-==1685== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==1685== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==1685== Command: ./test-eval inp.2.txt
-==1685== Parent PID: 1684
-==1685== 
-==1685== Use of uninitialised value of size 8
-==1685==    at 0x400C21: print_hand (deck.c:14)
-==1685==    by 0x4029BA: describe_hand (test-eval.c:74)
-==1685==    by 0x402BBA: main (test-eval.c:119)
-==1685== 
-==1685== Invalid read of size 8
-==1685==    at 0x400C21: print_hand (deck.c:14)
-==1685==    by 0x4029BA: describe_hand (test-eval.c:74)
-==1685==    by 0x402BBA: main (test-eval.c:119)
-==1685==  Address 0x5209470 is 0 bytes inside a block of size 24 free'd
-==1685==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1685==    by 0x4021B4: evaluate_hand (eval.c:253)
-==1685==    by 0x40296F: describe_hand (test-eval.c:68)
-==1685==    by 0x402BBA: main (test-eval.c:119)
-==1685==  Block was alloc'd at
-==1685==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1685==    by 0x40142F: get_match_counts (eval-c4.c:70)
-==1685==    by 0x402132: evaluate_hand (eval.c:248)
-==1685==    by 0x40296F: describe_hand (test-eval.c:68)
-==1685==    by 0x402BBA: main (test-eval.c:119)
-==1685== 
-==1685== 
-==1685== Process terminating with default action of signal 6 (SIGABRT): dumping core
-==1685==    at 0x4E6F428: raise (raise.c:54)
-==1685==    by 0x4E71029: abort (abort.c:89)
-==1685==    by 0x4EB17E9: __libc_message (libc_fatal.c:175)
-==1685==    by 0x4F5315B: __fortify_fail (fortify_fail.c:37)
-==1685==    by 0x4F530FF: __stack_chk_fail (stack_chk_fail.c:28)
-==1685==    by 0x401C17: build_hand_from_match (eval.c:141)
-==1685==    by 0x402565: evaluate_hand (eval.c:302)
-==1685==    by 0x40296F: describe_hand (test-eval.c:68)
-==1685==    by 0x402B9A: main (test-eval.c:116)
-==1685== 
-==1685== HEAP SUMMARY:
-==1685==     in use at exit: 896 bytes in 18 blocks
-==1685==   total heap usage: 202 allocs, 184 frees, 12,468 bytes allocated
-==1685== 
-==1685== LEAK SUMMARY:
-==1685==    definitely lost: 0 bytes in 0 blocks
-==1685==    indirectly lost: 0 bytes in 0 blocks
-==1685==      possibly lost: 0 bytes in 0 blocks
-==1685==    still reachable: 896 bytes in 18 blocks
-==1685==         suppressed: 0 bytes in 0 blocks
-==1685== Rerun with --leak-check=full to see details of leaked memory
-==1685== 
-==1685== For counts of detected and suppressed errors, rerun with: -v
-==1685== Use --track-origins=yes to see where uninitialised values come from
-==1685== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==2076== Memcheck, a memory error detector
+==2076== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==2076== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==2076== Command: ./test-eval inp.2.txt
+==2076== Parent PID: 2075
+==2076== 
+==2076== Use of uninitialised value of size 8
+==2076==    at 0x400C21: print_hand (deck.c:14)
+==2076==    by 0x4029BA: describe_hand (test-eval.c:74)
+==2076==    by 0x402BBA: main (test-eval.c:119)
+==2076== 
+==2076== Invalid read of size 8
+==2076==    at 0x400C21: print_hand (deck.c:14)
+==2076==    by 0x4029BA: describe_hand (test-eval.c:74)
+==2076==    by 0x402BBA: main (test-eval.c:119)
+==2076==  Address 0x5209470 is 0 bytes inside a block of size 24 free'd
+==2076==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2076==    by 0x4021B4: evaluate_hand (eval.c:253)
+==2076==    by 0x40296F: describe_hand (test-eval.c:68)
+==2076==    by 0x402BBA: main (test-eval.c:119)
+==2076==  Block was alloc'd at
+==2076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2076==    by 0x40142F: get_match_counts (eval-c4.c:70)
+==2076==    by 0x402132: evaluate_hand (eval.c:248)
+==2076==    by 0x40296F: describe_hand (test-eval.c:68)
+==2076==    by 0x402BBA: main (test-eval.c:119)
+==2076== 
+==2076== 
+==2076== Process terminating with default action of signal 6 (SIGABRT): dumping core
+==2076==    at 0x4E6F428: raise (raise.c:54)
+==2076==    by 0x4E71029: abort (abort.c:89)
+==2076==    by 0x4EB17E9: __libc_message (libc_fatal.c:175)
+==2076==    by 0x4F5315B: __fortify_fail (fortify_fail.c:37)
+==2076==    by 0x4F530FF: __stack_chk_fail (stack_chk_fail.c:28)
+==2076==    by 0x401C17: build_hand_from_match (eval.c:141)
+==2076==    by 0x402565: evaluate_hand (eval.c:302)
+==2076==    by 0x40296F: describe_hand (test-eval.c:68)
+==2076==    by 0x402B9A: main (test-eval.c:116)
+==2076== 
+==2076== HEAP SUMMARY:
+==2076==     in use at exit: 896 bytes in 18 blocks
+==2076==   total heap usage: 202 allocs, 184 frees, 12,468 bytes allocated
+==2076== 
+==2076== LEAK SUMMARY:
+==2076==    definitely lost: 0 bytes in 0 blocks
+==2076==    indirectly lost: 0 bytes in 0 blocks
+==2076==      possibly lost: 0 bytes in 0 blocks
+==2076==    still reachable: 896 bytes in 18 blocks
+==2076==         suppressed: 0 bytes in 0 blocks
+==2076== Rerun with --leak-check=full to see details of leaked memory
+==2076== 
+==2076== For counts of detected and suppressed errors, rerun with: -v
+==2076== Use --track-origins=yes to see where uninitialised values come from
+==2076== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Testcase 3: Trying hands with 2 pairs
  Checking the output 
 Your file matched the expected output
  - Testcase passed
 Testcase 4: Trying hands with 3 of a kind
 Valgrind returned an error status
-==1702== Memcheck, a memory error detector
-==1702== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==1702== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==1702== Command: ./test-eval inp.4.txt
-==1702== Parent PID: 1701
-==1702== 
-==1702== Use of uninitialised value of size 8
-==1702==    at 0x400C21: print_hand (deck.c:14)
-==1702==    by 0x4029BA: describe_hand (test-eval.c:74)
-==1702==    by 0x402B9A: main (test-eval.c:116)
-==1702== 
-==1702== Invalid read of size 8
-==1702==    at 0x400C21: print_hand (deck.c:14)
-==1702==    by 0x4029BA: describe_hand (test-eval.c:74)
-==1702==    by 0x402B9A: main (test-eval.c:116)
-==1702==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==1702== 
-==1702== 
-==1702== Process terminating with default action of signal 11 (SIGSEGV): dumping core
-==1702==  Access not within mapped region at address 0x0
-==1702==    at 0x400C21: print_hand (deck.c:14)
-==1702==    by 0x4029BA: describe_hand (test-eval.c:74)
-==1702==    by 0x402B9A: main (test-eval.c:116)
-==1702==  If you believe this happened as a result of a stack
-==1702==  overflow in your program's main thread (unlikely but
-==1702==  possible), you can try to increase the size of the
-==1702==  main thread stack using the --main-stacksize= flag.
-==1702==  The main thread stack size used in this run was 8388608.
-==1702== 
-==1702== HEAP SUMMARY:
-==1702==     in use at exit: 896 bytes in 18 blocks
-==1702==   total heap usage: 264 allocs, 246 frees, 13,664 bytes allocated
-==1702== 
-==1702== LEAK SUMMARY:
-==1702==    definitely lost: 0 bytes in 0 blocks
-==1702==    indirectly lost: 0 bytes in 0 blocks
-==1702==      possibly lost: 0 bytes in 0 blocks
-==1702==    still reachable: 896 bytes in 18 blocks
-==1702==         suppressed: 0 bytes in 0 blocks
-==1702== Rerun with --leak-check=full to see details of leaked memory
-==1702== 
-==1702== For counts of detected and suppressed errors, rerun with: -v
-==1702== Use --track-origins=yes to see where uninitialised values come from
-==1702== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==2093== Memcheck, a memory error detector
+==2093== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==2093== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==2093== Command: ./test-eval inp.4.txt
+==2093== Parent PID: 2092
+==2093== 
+==2093== Use of uninitialised value of size 8
+==2093==    at 0x400C21: print_hand (deck.c:14)
+==2093==    by 0x4029BA: describe_hand (test-eval.c:74)
+==2093==    by 0x402B9A: main (test-eval.c:116)
+==2093== 
+==2093== Invalid read of size 8
+==2093==    at 0x400C21: print_hand (deck.c:14)
+==2093==    by 0x4029BA: describe_hand (test-eval.c:74)
+==2093==    by 0x402B9A: main (test-eval.c:116)
+==2093==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==2093== 
+==2093== 
+==2093== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==2093==  Access not within mapped region at address 0x0
+==2093==    at 0x400C21: print_hand (deck.c:14)
+==2093==    by 0x4029BA: describe_hand (test-eval.c:74)
+==2093==    by 0x402B9A: main (test-eval.c:116)
+==2093==  If you believe this happened as a result of a stack
+==2093==  overflow in your program's main thread (unlikely but
+==2093==  possible), you can try to increase the size of the
+==2093==  main thread stack using the --main-stacksize= flag.
+==2093==  The main thread stack size used in this run was 8388608.
+==2093== 
+==2093== HEAP SUMMARY:
+==2093==     in use at exit: 896 bytes in 18 blocks
+==2093==   total heap usage: 264 allocs, 246 frees, 13,664 bytes allocated
+==2093== 
+==2093== LEAK SUMMARY:
+==2093==    definitely lost: 0 bytes in 0 blocks
+==2093==    indirectly lost: 0 bytes in 0 blocks
+==2093==      possibly lost: 0 bytes in 0 blocks
+==2093==    still reachable: 896 bytes in 18 blocks
+==2093==         suppressed: 0 bytes in 0 blocks
+==2093== Rerun with --leak-check=full to see details of leaked memory
+==2093== 
+==2093== For counts of detected and suppressed errors, rerun with: -v
+==2093== Use --track-origins=yes to see where uninitialised values come from
+==2093== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Testcase 5: Trying hands with straights
  Checking the output 
 Your file matched the expected output
