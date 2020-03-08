@@ -49,7 +49,6 @@ size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
       if (match_counts[i] == n_of_akind) {return i;}
     }
   }
-  assert(0);
   return 0;
 }
 ssize_t  find_secondary_pair(deck_t * hand,
