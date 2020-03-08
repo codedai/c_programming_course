@@ -124,32 +124,30 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 				  hand_ranking_t what,
 				  size_t idx) {
 
-
   hand_eval_t ans;
-  card_t**card = hand -> cards;
-  unsigned count =n;
-
   ans.ranking = what;
-
-  for(size_t i=0 ; i< n ; i++){
-    ans.cards[i] = *(card +idx+i);
+  card_t ** cardsInHand = hand->cards;
+  for (size_t i = 0; i < n; i++) {
+    ans.cards[i] = cardsInHand[i+idx];
   }
-  if (n < 5){
-    for(size_t i=0 ; i< idx ; i++){
-      ans.cards[i+n] = *(card +i);
-      count ++;
-      if (count == 5 )  break;
+  if (n < 5) {
+    unsigned count = n;
+    for (size_t i = 0; i < idx; i++) {
+      ans.cards[count+i] = cardsInHand[i];
+      count++;
+      if (count == 5) break;
     }
-    if (count < 5){
-      for (size_t i=n+idx ; i < hand -> n_cards+1 ; i++ ){
-	ans.cards[count]=*(card +i);
-	count ++;
-	if (count >= 5) break;}
+    if (count < 5) {
+      for (size_t i = idx + n; i < hand->n_cards; i++) {
+	ans.cards[count] = cardsInHand[i];
+	count++;
+	if (count == 5) break;
+      }
     }
   }
-
   return ans;
 }
+
 
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
