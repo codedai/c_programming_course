@@ -12,7 +12,7 @@ void print_hand(deck_t * hand){
     card_t card1;
     for (size_t i = 0; i < hand->n_cards; i++) {
       card1 = **(aofcptr+i);
-      print_hand(card1);
+      print_card(card1);
     }
   }
 }
